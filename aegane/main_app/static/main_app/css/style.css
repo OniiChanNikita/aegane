@@ -1,0 +1,262 @@
+/*
+colors:
+#3b3a3d -- gray-black
+#6e6c78 -- gray
+#7aa899 -- white-green
+|
+#8391A1 -- mix
+|
+#8b7aa8 -- pump-white
+#27263d -- blue-black
+*/
+a{
+    color: white;
+    text-decoration: none;
+    z-index: 10;
+
+}
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}*/
+body{
+    overflow-x: hidden;
+    background-color: rgb(245, 245, 245);
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.wrapper{
+    min-height: 100%;
+    width:100%;
+}
+._container{
+    max-width: 1200px;
+    padding: 20px 20px;
+    margin: 0 auto;
+}
+._center_label{
+    border-left: 2px white solid;
+    border-right: 2px white solid;
+}
+.parallax{
+    min-height: 100%;
+}
+.parallax_body{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+}
+.parallax_flex{
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Unbounded', cursive;
+}
+.title_container{
+    display: flex;
+    color: white;
+    text-transform: none;
+    min-width: 30%;
+    max-width: 30%;
+    height: 20%;
+    text-align: center;
+}
+.parallax_container{
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+}
+.parallax_label{
+    color: white;
+    display:flex;
+    font-size: 18px;
+    letter-spacing: 0;
+    margin: 0 0 30px 0;
+    text-transform: uppercase;
+    width: 97%;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+    font-family: 'Unbounded', cursive;
+}
+.nav_menu{
+    color: white;
+    display:flex;
+    font-size: 18px;
+    letter-spacing: 0;
+    margin: 0 0 30px 0;
+    align-items: center;
+    justify-content: space-between;
+}
+.right-side_label{
+    display: flex;
+    max-width: 80%;
+    justify-content: space-around;
+    gap: 20px;
+}
+.parallax_title{
+    font-size: 30px;
+}
+.parallax_images{
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    top: -10%;
+    left: -5%;
+    z-index: 1;
+}
+.images-parallax_item{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+}
+.house-parallax,
+.up-parallax,
+.down-parallax{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+@media (max-aspect-ratio: 3/2){
+    .up-parallax{
+        background-position: 200% top;
+    }
+}
+.content{
+    background: rgb(43,68,111);
+    background: linear-gradient(60deg, rgba(43,68,111,1) 0%, rgba(52,49,66,1) 50%, rgba(52,49,66,1) 65%, rgba(39,108,144,1) 100%);
+    position: relative;
+    width: 100%;
+    height: max-content;
+    z-index: 2;
+}
+.main_content{
+    color:white;
+    font-size: 34px;
+    min-height: 100%;
+}
+.slider_body{
+    width:100%;
+    overflow: hidden;
+}
+.slider_status{
+    display: flex;
+    flex-direction: row;
+    transition: all ease 0.7s;
+}
+.button_nav_block{
+    position: absolute;
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.button_nav{
+    width: 50%;
+    height:675px;
+    z-index: 10;
+    background: inherit;
+    border: 0;
+}
+.status{
+    display: flex;
+    position: absolute;
+    margin-top:650px;
+    justify-content: center;
+    flex-direction: row;
+}
+.login_content{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.login_body{
+    margin: 15% auto;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 300px;
+    background: white;
+    border: 3px #bee365 solid;
+    border-radius: 5px;
+}
+.login_container{
+    display: flex;
+    flex-direction: column;
+    padding: 10%;
+    width: 85%;
+    height: 100%;
+}
+.login_container form{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
+    height: 60%;
+
+}
+.form_body{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 60%;
+}
+.form_body input{
+    outline: none;
+    z-index: 2;
+    border: 0;
+    padding: 7px 0;
+    border-bottom: 1px solid #ccc;
+    transition: 0.4s;
+}
+.form_body input:focus{
+    border-bottom: 1.5px solid #4caf50;
+}
+
+/* CSS */
+.button-88 {
+    text-align: center;
+    width: 40%;
+    display: flex;
+    font-family: 'Unbounded', cursive;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0.7em 1.4em 0.7em 1.1em;
+    color: #14a73e98;
+    border: 2px #bee365 solid;
+    background: white;
+    box-shadow: -0.4em 0.4em 1.5em 0.001em #14a73e98;
+    letter-spacing: 0.05em;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-88:hover {
+    box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
+}
+
+.button-88:active {
+    box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+}
+

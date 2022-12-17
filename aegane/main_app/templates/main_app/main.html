@@ -1,0 +1,129 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200&display=swap" rel="stylesheet">
+
+    <link href="{% static 'main_app/css/style.css' %}" type = 'text/css' rel="stylesheet">
+    <script src="{% static 'main_app/script.js' %}"></script>
+    <style>
+        .login_content{
+            background: url("{% static 'main_app/photo/tourist_bg_no-tree.png' %}") center / cover no-repeat;
+        }
+        .house-parallax{
+            background: url("{% static 'main_app/photo/head_main_house.png' %}") center / cover no-repeat;
+            z-index: 2; !important;
+        }
+        .up-parallax{
+            background: url("{% static 'main_app/photo/head_main_up_obl (1).png' %}") center / cover no-repeat;
+            top:0;
+            z-index: 0; !important;
+        }
+        .down-parallax{
+            background: url("{% static 'main_app/photo/head_main_down.png' %}") center / cover no-repeat;
+            bottom: 0;
+            z-index: 3;
+        }
+  /*      .around-parallax:hover{
+            !*filter: grayscale(0%);*!
+            !*transition: filter .5s ease-in-out;*!
+            !*filter: grayscale(99%);*!
+        }*/
+        .tickets_image{
+            background: url("{% static 'main_app/photo/tickets.jpg' %}") center / cover no-repeat;
+            background-size: 90%;
+        }
+    </style>
+
+    <title>Aegane</title>
+<script language="JavaScript" type="text/javascript">
+</script>
+</head>
+
+<body>
+    <div class="wrapper">
+        {% block wrapper %}
+        {% block parallax %}
+        <section class="parallax">
+            <div class="parallax_body">
+                <div class="parallax_container">
+                    <div class="parallax_label" style = "padding: 20px 20px">
+                        <div class="left_label">Aegane</div>
+                        <div class="right-side_label">
+                            <div><a>Shop</a></div>
+                            {% if not request.user.is_authenticated %}
+                                <div><a href="{% url 'login' %}">Login</a></div>
+                                <div><a href="{% url 'sign_in' %}">Sign in</a></div>
+                            {% else %}
+                                <div><a href=''>{{request.user.username}}</a></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="parallax_flex _container" style="padding: 0">
+                        <div class="title_container">
+                            <h1 class="parallax_title" id="_ll">Large selection of countries</h1>
+                        </div>
+                        <div class="title_container _center_label">
+                            <h1 class="parallax_title" id="_cl">Travel not only by transport</h1>
+                        </div>
+                        <div class="title_container">
+                            <h1 class="parallax_title" id="_rl">Looking for a group of people to travel together</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="parallax_images images-parallax">
+                    <div class="images-parallax_item">
+                        <div class="house-parallax"></div>
+                    </div>
+                    <div class="images-parallax_item">
+                        <div class="down-parallax"></div>
+                    </div>
+                    <div class="images-parallax_item">
+                        <div class="up-parallax"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock parallax %}
+
+        {% block content %}
+        <section class="content">
+            <div class="_container">
+                <div class="main_content">
+                    <div class="tickets_title">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="slider_body">
+                        <div class="button_nav_block">
+                            <button class="arrow status_left button_nav"></button>
+                            <button class="arrow status_right button_nav"></button>
+                        </div>
+                        <div class = "status">
+                            
+                        </div>
+                        <div class = "slider_status">
+                            <img src="{% static 'main_app/photo/scroll_img1.jpg' %}" alt="">
+                            <img src="{% static 'main_app/photo/scroll_img2.jpg' %}" alt="">
+                            <img src="{% static 'main_app/photo/scroll_img3.jpg' %}" alt="">
+                            <img src="{% static 'main_app/photo/scroll_img4.jpg' %}" alt="">
+                            <img src="{% static 'main_app/photo/scroll_img5.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="tickets_title">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock content %}
+        {% endblock wrapper %}
+    </div>
+</body>
+</html>
