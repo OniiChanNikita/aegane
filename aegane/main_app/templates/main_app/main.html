@@ -58,7 +58,7 @@
                                 <div><a href="{% url 'login' %}">Login</a></div>
                                 <div><a href="{% url 'sign_in' %}">Sign in</a></div>
                             {% else %}
-                                <div><a href=''>{{request.user.username}}</a></div>
+                                <div><a href="{% url 'profile' %}">{{request.user.username}}</a></div>
                             {% endif %}
                         </div>
                     </div>

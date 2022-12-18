@@ -53,4 +53,8 @@ def sign_in(request):
 def log_out(request):
     if request.user.is_authenticated:
         logout(request)
-    return redirect("main")
+        return redirect("main")
+    return render(request, "main_app/main.html")
+
+def profile(request):
+    print("a")
