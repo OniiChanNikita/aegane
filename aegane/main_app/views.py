@@ -57,4 +57,5 @@ def log_out(request):
     return render(request, "main_app/main.html")
 
 def profile(request):
-    print("a")
+    if request.user.is_authenticated:
+        return render(request, 'main_app/profile.html')
