@@ -11,6 +11,7 @@ window.onload=function() {
         const center_label = document.querySelector('#_cl')
         const right_label = document.querySelector('#_rl');
         const left_label = document.querySelector('#_ll');
+        const logo_profile = document.querySelector('.logo_main_nav')
         const speed = 0.1;
         const forAround = 90;
         const forUp = 70;
@@ -63,6 +64,8 @@ window.onload=function() {
                 right_label.parentElement.style.cssText = `margin: 0 0 0 ${scrollTopProcent*200}px; display: block;`;
                 left_label.parentElement.style.cssText = `margin: 0 ${scrollTopProcent*200}px 0 0; display: block;`;
                 main_content.style.cssText = `display: block; opacity: ${1/scrollTopProcentOpacity*2}`;
+                logo_profile.style.cssText = `opacity: ${scrollTopProcentOpacity}`;
+
             }
         }
         window.addEventListener('scroll', function () {
