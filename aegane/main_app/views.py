@@ -65,6 +65,7 @@ def log_out(request):
 
 def profile(request):
     if request.user.is_authenticated:
-        profile_logo = '/static/main_app/photo/logo' + ProfileUser.objects.get(username = request.user.username).logo_user.url
+        info_user = ProfileUser.objects.get(username = request.user.username)
+        profile_logo = '/static/main_app/photo/logo' + info_user.logo_user.url
         print(profile_logo)
-        return render(request, 'main_app/profile.html', {'profile_logo': profile_logo})  #/static/main_app/photo/logo/default_logo.png
+        return render(request, 'main_app/profile.html', {'info_user': info_user, 'profile_logo': profile_logo})  #/static/main_app/photo/logo/default_logo.png
