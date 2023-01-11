@@ -1,6 +1,12 @@
 from django import forms
-
+from .models import TYPE_TRAVEL
 
 class InputUserForm(forms.Form):
-    username = forms.CharField();
-    password = forms.CharField(widget=forms.PasswordInput);
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+class CreatePostForm(forms.Form):
+    theme_post = forms.CharField(max_length=300)
+    content_post = forms.CharField(widget=forms.Textarea(attrs={}))
+    country = forms.CharField(max_length=30)
+    type_travel = forms.ChoiceField(choices = TYPE_TRAVEL, label="type_travel")

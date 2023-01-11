@@ -5,8 +5,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from main_app.forms import InputUserForm
-from main_app.models import ProfileUser
+from main_app.forms import *
+from main_app.models import *
 
 
 def main(request):
@@ -69,3 +69,22 @@ def profile(request):
         profile_logo = '/static/main_app/photo/logo' + info_user.logo_user.url
         print(profile_logo)
         return render(request, 'main_app/profile.html', {'info_user': info_user, 'profile_logo': profile_logo})  #/static/main_app/photo/logo/default_logo.png
+def add_post(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            print("a")
+            form = CreatePostForm(request.POST)
+            if form.is_valid():
+                username = request.POST['username']
+                theme_post = request.POST['theme_post']
+                content_post = request.POST['content_post']
+                country = request.POST['country']
+                type_travel  = request.POST['type_travel ']
+                print("a")
+                return render(request, 'main_app/add_post.html', {'profile': ProfileUser.objects.filter(username=request.user.username), 'form': form })
+        else:
+            form = CreatePostForm()
+        return render(request, 'main_app/add_post.html',
+              {'profile': ProfileUser.objects.filter(username=request.user.username), 'form': form})
+
+    return redirect("main")

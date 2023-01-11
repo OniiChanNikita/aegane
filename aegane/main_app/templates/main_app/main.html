@@ -58,6 +58,7 @@
                                 <div><a href="{% url 'login' %}">Login</a></div>
                                 <div><a href="{% url 'sign_in' %}">Sign in</a></div>
                             {% else %}
+                                <div class="logo_main_nav"><a href="{% url 'add_post' %}">Add</a></div>
                                 <div class="logo_main_nav"><a href="{% url 'profile' %}"><img width="30px" src="{{profile_logo}}"></a></div>
                             {% endif %}
                         </div>

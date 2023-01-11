@@ -75,7 +75,7 @@ body{
     text-align: center;
 }
 .parallax_container{
-    text-transform: uppercase;
+    text-transform: 4;
     position: relative;
     z-index: 2;
 }
@@ -194,6 +194,7 @@ body{
     height: 100%;
     z-index: 1;
 }
+
 .login_body{
     margin: 15% auto;
     display: flex;
@@ -203,6 +204,17 @@ body{
     background: white;
     border: 3px #bee365 solid;
     border-radius: 5px;
+}
+.post_body{
+    margin: 15% auto;
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    height: 600px;
+    background: white;
+    border: 3px #bee365 solid;
+    border-radius: 5px;
+    overflow: hidden;
 }
 .login_container{
     display: flex;
@@ -235,6 +247,16 @@ body{
 }
 .form_body input:focus{
     border-bottom: 1.5px solid #4caf50;
+}
+.form_body textarea{
+    outline: none;
+    z-index: 2;
+    padding: 7px 0;
+    border: 1px solid #ccc;
+    transition: 0.4s;
+}
+.form_body textarea:focus{
+    border: 1.5px solid #4caf50;
 }
 
 /* CSS */
@@ -294,7 +316,7 @@ body{
 .logo_profile_img{
     border-radius: 100%;
     border: 3px #bee365 solid;
-    width: 40%;
+    width: 45%;
 
 }
 .profile_key-words_body{
@@ -307,16 +329,83 @@ body{
     display: flex;
     justify-content: center;
 }
+
 .profile_tourist-post{
     display: flex;
+    min-height: 100%;
+    justify-content: space-between;
+    flex-direction: column;
     min-width: 70%;
+    height: 100%;
+}
+.nav_profile-post{
+    display: flex;
     justify-content: space-around;
     flex-direction: row;
-    height: 100%;
     padding: 50px;
+    font-size: 17.5px;
+    font-family: 'Unbounded', cursive;
 }
 .profile_tourist-post_body{
     display: flex;
+    justify-content: start;
     flex-direction: column;
     height: 100%;
+}.content_profile_post{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: start;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+ }
+.elem_profile_post{
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    height: 150px;
+    background: black;
+    flex-direction: column;
+}
+.img_elem_profile{
+    width: 100%;
+    height: 75%;
+    background: white;
+}
+#id_type_travel{
+    position: relative;
+    font-family: 'Unbounded', cursive;
+    padding: 10px 17.5px;
+    display: flex;
+    border: 1.5px #bee365 solid;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.select_div{
+    position: relative;
+    display: inline-block;
+}
+.select_div:after {
+  color: #8da94a;
+  content: ""; /*▼*/
+  padding-top: 7.5px;
+  font-size: 12px;
+  position: absolute;
+  right: 8px;
+  top: 4px;
+  z-index: 1;
+  text-align: center;
+  width: 10%;
+  height: 100%;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+#id_content_post{
+    resize: none;
+    width: 100%;
+    height: 100px;
 }
