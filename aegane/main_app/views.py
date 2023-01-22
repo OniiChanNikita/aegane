@@ -66,22 +66,23 @@ def log_out(request):
 def profile(request):
     if request.user.is_authenticated:
         info_user = ProfileUser.objects.get(username = request.user.username)
+        info_user_post = PostUserModel.objects.filter(username = request.user.username)
         profile_logo = '/static/main_app/photo/logo' + info_user.logo_user.url
         print(profile_logo)
-        return render(request, 'main_app/profile.html', {'info_user': info_user, 'profile_logo': profile_logo})  #/static/main_app/photo/logo/default_logo.png
+        return render(request, 'main_app/profile.html', {'info_user': info_user, 'info_user_post': info_user_post, 'profile_logo': profile_logo})  #/static/main_app/photo/logo/default_logo.png
 def add_post(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             print("a")
             form = CreatePostForm(request.POST)
             if form.is_valid():
-                username = request.POST['username']
+                username_post = request.POST['username_post']
                 theme_post = request.POST['theme_post']
                 content_post = request.POST['content_post']
                 country = request.POST['country']
-                type_travel  = request.POST['type_travel ']
-                print("a")
-                return render(request, 'main_app/add_post.html', {'profile': ProfileUser.objects.filter(username=request.user.username), 'form': form })
+                type_travel  = request.POST['type_travel']
+                PostUserModel.objects.create(username = username_post, theme_post = theme_post, content_post = content_post, country = country, type_travel = type_travel)
+                return render(request, 'main_app/add_post.html', {'profile': ProfileUser.objects.filter(username=request.user.username), 'form': form})
         else:
             form = CreatePostForm()
         return render(request, 'main_app/add_post.html',

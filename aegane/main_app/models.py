@@ -21,5 +21,8 @@ class PostUserModel(models.Model):
     country = models.CharField(max_length=50)
     type_travel = models.CharField(max_length=30, choices = TYPE_TRAVEL)
 
+    def __str__(self):
+        return self.theme_post
+
     def __unicode__(self):
         return self.TYPE_TRAVEL

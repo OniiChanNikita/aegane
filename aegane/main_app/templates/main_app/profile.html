@@ -8,10 +8,11 @@
         height: 100%;
         overflow: hidden;
         display: flex;
-        background: url("{% static 'main_app/photo/mountains.png' %}") center / cover no-repeat;
+        background-color: #E7E9E7;
     }
 </style>
 <div class="profile_content">
+
     <div class="profile_body">
         <div class="profile_key-words">
             <div class="logo_profile_body">
@@ -33,17 +34,27 @@
                     My list
                 </div>
             </div>
-            <div class="content_profile_post">
-                <div class="elem_profile_post">
-                    <div class="img_elem_profile"></div>
-                    <div class="writer_content_elem_profile"></div>
-                </div>
-                <div class="elem_profile_post">
-                    <div class="img_elem_profile"></div>
-                    <div class="writer_content_elem_profile"></div>
+            <div class="content_profile_post_center">
+                <div class="content_profile_post">
+                    {% for i in info_user_post %}
+                    <div class="elem_profile_post">
+                        <div class="img_elem_profile"></div>
+                        <div class="writer_content_elem_profile">
+                            <diV class="theme_name">
+                                <div>{{i.theme_post}}</div>
+                                <div>{{i.username}}</div>
+                            </diV>
+                            <div style="margin: auto;">{{i.type_travel}}</div>
+
+
+
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </div>
 {% endblock wrapper %}
+
