@@ -1,14 +1,14 @@
 {% extends 'main_app/login.html' %}
 
 {% block content_form %}
-  <div class="post_body">
-    <div class="login_container">
+  <div class="post_body" style="">
+    <div class="login_container" >
       <div style="text-align: center; color: #4caf50; font-size: 25px; font-family: 'Unbounded', cursive;">{% block nameInput %}Create post{% endblock nameInput %}</div>
-      <form method="post" style="height: 70%">
-        <div class="form_body" style="gap: 30px">
+      <form method="post" style="height: 85%">
+        <div class="form_body" style="gap: 30px" action="" method="post" enctype="multipart/form-data">
             {% for f in form %}
                 {% csrf_token %}
-                {% if f.label != 'type_travel' and f.label != 'country' %}
+                {% if f.label != 'type_travel' and f.label != 'country' and f.label != 'image_bg' %}
                     {{f}}
                 {% endif %}
 
@@ -24,6 +24,15 @@
                     </div>
                 {% endif %}
 
+                {% if f.label == 'image_bg' %}
+                    <div class="input__wrapper">
+                       {{ f }}
+                       <label for="id_image_bg" class="input__file-button">
+                           <span class="input__file-button-text">Выберите файл</span>
+                       </label>
+                    </div>
+
+                {% endif %}
 
             {% endfor %}
         </div>

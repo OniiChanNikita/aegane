@@ -206,11 +206,11 @@ body{
     border-radius: 5px;
 }
 .post_body{
-    margin: 10% auto;
+    margin: 5% auto;
     display: flex;
     justify-content: center;
-    width: 500px;
-    height: 600px;
+    width: 600px;
+    height: 750px;
     background: white;
     border: 3px #bee365 solid;
     border-radius: 5px;
@@ -435,3 +435,66 @@ body{
     display: flex;
     justify-content: space-around;
 }
+
+
+
+
+
+.input__wrapper {
+  width: 100%;
+  position: relative;
+  margin: 15px 0;
+  text-align: center;
+}
+#id_image_bg {
+    opacity: 0;
+    position: absolute;
+    right: 100px;
+    width: 290px;
+    height: 60px;
+}
+
+.input__file-icon-wrapper {
+  height: 60px;
+  width: 60px;
+  margin-right: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-right: 1px solid #fff;
+}
+
+.input__file-button-text {
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.input__file-button {
+    width: 100%;
+    max-width: 290px;
+    height: 60px;
+    background: transparent;
+    color: black ;
+    font-family: 'Unbounded', cursive;
+    font-size: 1.125rem;
+    font-weight: 700;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+    -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: center;
+    border-radius: 2px;
+    border: 2px #bee365 dashed;
+    cursor: pointer;
+    margin: 0 auto;
+    }

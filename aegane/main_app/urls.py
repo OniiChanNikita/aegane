@@ -9,4 +9,5 @@ urlpatterns = [
     path("logout/", log_out, name="logout"),
     path("profile/", profile, name="profile"),
     path("add_post/", add_post, name="add_post"),
+    path("chat/<str:chat_box_name>/", chat_box, name="chat"),
 ]
