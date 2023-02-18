@@ -10,7 +10,11 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
-
+{% if chat_box_ident.user1 != request.user.username %}
+    '{{ chat_box_ident.user1 }}' +
+{% else %}
+    '{{ chat_box_ident.user2 }}' +
+{% endif  %}
 <body>
 
     <div class="container">

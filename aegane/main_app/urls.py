@@ -9,5 +9,6 @@ urlpatterns = [
     path("logout/", log_out, name="logout"),
     path("profile/", profile, name="profile"),
     path("add_post/", add_post, name="add_post"),
-    path("chat/<str:chat_box_name>/", chat_box, name="chat"),
+    path('chat/', list_chat_box, name='list_chat_box'),
+    path('chat/<int:slug_num>/', chat_box, name='chat_box'),
 ]

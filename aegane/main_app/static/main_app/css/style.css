@@ -240,6 +240,7 @@ body{
 .form_body input{
     outline: none;
     z-index: 2;
+    z-index: 2;
     border: 0;
     padding: 7px 0;
     border-bottom: 1px solid #ccc;
@@ -497,4 +498,83 @@ body{
     border: 2px #bee365 dashed;
     cursor: pointer;
     margin: 0 auto;
-    }
+}
+
+
+/*chat*/
+
+.box_center{
+    display: flex;
+    min-width: 100vw;
+    min-height: 100vh;
+    justify-content: center;
+}
+.box{
+    margin: auto;
+    display: flex;
+    min-width: 80%;
+    min-height: 80vh;
+    max-height: 80vh;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 10px;
+}
+.list_box{
+    width: 20%;
+    min-height: 100%;
+    background: white;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 2px #bee365 solid;
+}
+.chat_box{
+    width:80%;
+    min-height: 100%;
+    background: white;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 2px #bee365 solid;
+
+}
+.logo_list{
+    width: 100%;
+    height: 75px;
+    font-family: 'Unbounded', cursive;
+    text-align-all: center;
+}
+.form_chat_list{
+    padding: 10% 5% 0 5%;
+}
+.form_chat_list input:focus{
+    border-bottom: 1.5px solid #4caf50;
+}
+.form_chat_list input{
+    outline: none;
+    z-index: 2;
+    border: 0;
+    padding: 7px 0;
+    border-bottom: 1px solid #ccc;
+    transition: 0.4s;
+    width: 100%;
+}
+.list_chats{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    min-width:  70%;
+    max-width: 100%;
+    height: 100%;
+    gap: 10px
+}
+.list_chats a{
+    display: flex;
+    justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    color: black;
+    background: transparent;
+    border: 0px;
+}

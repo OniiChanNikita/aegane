@@ -14,3 +14,7 @@ class CreatePostForm(forms.Form):
     country = forms.CharField(max_length=30, label="country")
     type_travel = forms.ChoiceField(choices=TYPE_TRAVEL, label="type_travel")
     image_bg = forms.FileField()
+
+
+class SearchUser(forms.Form):
+    username = forms.CharField(max_length=255)

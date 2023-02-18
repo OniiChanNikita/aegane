@@ -1,9 +1,10 @@
 from django.db import IntegrityError
-
+import random
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.db.models import Q
+from django.shortcuts import render, redirect, get_object_or_404
 
 from main_app.forms import *
 from main_app.models import *
@@ -106,6 +107,36 @@ def add_post(request):
     return redirect("main")
 
 
-def chat_box(request, chat_box_name):
-    # we will get the chatbox name from the url
-    return render(request, "main_app/chatbox.html", {"chat_box_name": chat_box_name})
+def random_nums():
+    num = random.randint(10000000, 99999999)
+    return num
+
+
+def chat_box(request, slug_num):
+    if request.user.is_authenticated:
+        get_obj_slug = get_object_or_404(MessageChat, slug_num=slug_num)
+        if request.method == 'POST':
+            form = SearchUser(request.POST)
+            if form.is_valid():
+
+                if MessageChat.objects.filter(user1 = request.user.username, user2 = request.POST['username']).first() is None:
+                    MessageChat.objects.create(user1 = request.user.username, user2 = request.POST['username'], slug_num=random_nums())
+        else:
+            form = SearchUser()
+        print(get_obj_slug.user1)
+        return render(request, "main_app/chat_box.html",
+                  {'form_search': form, 'chat_box_ident': get_obj_slug})
+
+
+def list_chat_box(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = SearchUser(request.POST)
+            if form.is_valid():
+
+                if MessageChat.objects.filter(Q(user1 = request.user.username) | Q(user2 = request.user.username)).first() is None and request.user.username != request.POST['username']:
+                    MessageChat.objects.create(user1 = request.user.username, user2 = request.POST['username'], slug_num=random_nums())
+        else:
+            form = SearchUser()
+        return render(request, "main_app/list_chat_box.html", {'form_search': form, 'list_chat': MessageChat.objects.filter(Q(user1 = request.user.username) | Q(user2 = request.user.username))})
+

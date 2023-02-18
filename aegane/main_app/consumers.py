@@ -4,7 +4,7 @@ from .models import MessageChat
 
 class ChatRoomConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.chat_box_name = self.scope["url_route"]["kwargs"]["chat_box_name"]
+        self.chat_box_name = self.scope["url_route"]["kwargs"]["slug_num"]
         self.group_name = "chat_%s" % self.chat_box_name
         #self.user = , self.user1
         #if MessageChat.objects.get()
