@@ -1,37 +1,39 @@
 {% extends 'main_app/list_chat_box.html' %}
-
-
 {% block chat_block %}
-<div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-3">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1" class="h4 pt-5">Chatbox</label>
-                        <textarea class="form-control" id="chat-text" readonly rows="10"></textarea><br>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="Enter text here" id="input" type="text"></br>
-                    </div>
-                    <input class="btn btn-primary btn-lg btn-block" id="submit" type="button" value="Send">
-                </form>
-            </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="name_responser_chat">
+            {% if chat_box_ident.user1 != request.user.username %}
+                {{ chat_box_ident.user1 }}
+            {% else %}
+                {{ chat_box_ident.user2 }}
+            {% endif %}
         </div>
-    </div>
+
+        <div class="chat_box_message">
+            <textarea class="form-control" id="chat-text" readonly rows="10"></textarea><br>
+        </div>
+
+        <div class="input_message_box">
+            <input class="form-control" placeholder="Enter text here" id="input" type="text">
+            <input class="btn" id="submit" type="button" value="Send">
+        </div>
+    </form>
 {% endblock chat_block %}
 {% block script_block %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 {{ request.user.username|json_script:"user_username" }}
 {{ chat_box_name|json_script:"room-name" }}
 <script>
-   const chatSocket = new WebSocket(
+    const chatSocket = new WebSocket(
       'ws://' +
       window.location.host +
       '/chat/' +
         '{{ chat_box_ident.slug_num }}' +
       '/'
-   );
-   const user_username = JSON.parse(document.getElementById('user_username').textContent);
-   document.querySelector('#submit').onclick = function (e) {
+    );
+    const user_username = JSON.parse(document.getElementById('user_username').textContent);
+    document.querySelector('#submit').onclick = function (e) {
       const messageInputDom = document.querySelector('#input');
       const message = messageInputDom.value;
       chatSocket.send(JSON.stringify({
@@ -39,8 +41,20 @@
           'username': user_username,
       }));
       messageInputDom.value = '';
-   };
-
+    };
+    const input = document.querySelector('#input')
+     $('#input').on('keypress', function(event){
+        if(event.keyCode === 13){
+            event.preventDefault();
+            const messageInputDom = document.querySelector('#input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+              'message': message,
+              'username': user_username,
+            }));
+            messageInputDom.value = '';
+            }
+    });
    chatSocket.onmessage = function (e) {
       const data = JSON.parse(e.data);
       console.log(data)
