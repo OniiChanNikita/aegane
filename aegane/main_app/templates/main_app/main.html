@@ -44,6 +44,14 @@
 </head>
 
 <body>
+    {% block preload %}
+    <div class="preloader">
+      <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+      </div>
+    </div>
+    {% endblock preload %}
     <div class="wrapper">
         {% block wrapper %}
         {% block parallax %}
@@ -128,6 +136,17 @@
         {% endblock wrapper %}
     </div>
     {% block script_block %}
+
+        <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+              document.body.classList.add('loaded');
+              document.body.classList.remove('loaded_hiding');
+            }, 500);
+          }
+        </script>
     {% endblock script_block %}
+
 </body>
 </html>

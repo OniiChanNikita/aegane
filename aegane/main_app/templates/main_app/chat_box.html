@@ -23,7 +23,7 @@
 {% block script_block %}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 {{ request.user.username|json_script:"user_username" }}
-{{ chat_box_name|json_script:"room-name" }}
+{{ chat_box_name|json_script:"room-name"}}
 <script>
     const chatSocket = new WebSocket(
       'ws://' +
@@ -61,5 +61,6 @@
       document.querySelector('#chat-text').value += (data.message + ' sent by ' + data.username   + '\n') // add message to text box
    }
 </script>
+
 
 {% endblock script_block %}
