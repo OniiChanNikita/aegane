@@ -1,0 +1,44 @@
+{% extends 'main_app/main.html' %}
+
+{% block preload %}
+{% endblock preload %}
+
+{% block wrapper %}
+<div class="parallax_label" style = "color: #313131; padding: 20px 20px; position: fixed">
+    <div><a style="color: black" href="{% url 'main' %}">Aegane</a></div>
+    <div class="right-side_label">
+        <div><a style = "color: #313131;">Shop</a></div>
+        <div><a href="{% url 'main' %}" style = "color: #313131;">Home</a></div>
+
+    </div>
+</div>
+<div class="login_content">
+    {% block content_form %}
+    <div class="login_body">
+        <div class="login_container">
+            <div style="text-align: center; color: #4caf50; font-size: 25px; font-family: 'Unbounded', cursive;">{% block nameInput %}Login{% endblock nameInput %}</div>
+            <form method="post">
+                <div class="form_body">
+                    {% for f in form %}
+                        {% csrf_token %}
+                        {{f}}
+                    {% endfor %}
+                </div>
+                <div style="display: flex; justify-content: end;">
+                    <button class="button-88" type="submit" >Button</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endblock content_form %}
+</div>
+{% endblock wrapper %}
+{% block script_block %}
+    <script>
+        document.body.classList.add('loaded_hiding');
+        window.setTimeout(function () {
+          document.body.classList.add('loaded');
+          document.body.classList.remove('loaded_hiding');
+        }, 500);
+    </script>
+{% endblock script_block %}

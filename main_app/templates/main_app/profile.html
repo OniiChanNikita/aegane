@@ -1,0 +1,154 @@
+{% extends "main_app/main.html" %}
+{% load static %}
+
+{% block wrapper %}
+<style>
+    .profile_content{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        /*background-color: #E7E9E7;*/
+        
+    }
+    #sea_background{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url('{% static "main_app/photo/sea_background/Sea-shore-stones-waves-water-top-view_3840x2160.jpg" %}');
+        opacity: 0.8;
+        filter: blur(5px) contrast(0.5);
+        z-index: -10;
+    }
+</style>
+<div id = 'sea_background'></div>
+<div class="profile_content">
+
+    <div class="profile_body">
+        <div class="profile_key-words">
+
+            <div class="logo_profile_body">
+                {% if profile_logo %}
+                <img src="{{profile_logo.url}}" class="logo_profile_img">
+                {% else %}
+                <img src="{% static 'main_app/default_logo/default_logo.png' %}" class="logo_profile_img">
+                {% endif %}
+                {% if info_user.username != request.user.username %}
+                <form method="post" style="width: min-content">
+                    {% csrf_token %}
+                    <button name="button_add_friend" type="submit">Добавить друга</button>
+                </form>
+
+            {% endif %}
+            </div>
+            <div class="profile_key-words_body">
+                <div class="points_profile">
+                    <div>
+                        Posts:
+                        <br>
+                        <div style="font-weight: bolder; text-align: center">{{profile_lens}}</div>
+                    </div>
+                    <div>Name:
+                        <br>
+                        <div style="font-weight: bolder; text-align: center">{{info_user}}</div>
+                    </div>
+
+                    <div >Best post:<div id = 'best_post_ajax' style="font-weight: bolder; text-align: center">{{max_likes | truncatechars:7}}</div></div>
+                    <div>
+                        Friends:
+                        <div style="font-weight: bolder; text-align: center">{{count_friend}}</div>
+                    </div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <div class="profile_tourist-post">
+            <div class="nav_profile-post">
+                <a class="switches">
+                    Liked
+                </a>
+                <a href='{% url "profile" slug_profile=info_user.slug_profile %}posts_this_profile' class="tourist-post">
+                    My list
+                </a>
+            </div>
+            <div class="content_profile_post_center">
+                <div class="content_profile_post">
+                    {% for i in info_all_post %}
+                    <div class="elem_profile_post" id = '{{i.username}}_{{i.theme_post}}' style="background: url('{{i.image_bg_d.url}}') no-repeat center;">
+                            <form method="post" class = 'emotion_div' style="margin: 0">
+                                {% csrf_token %}
+                                <button name = '{{i.username}}_{{i.theme_post}}' type='submit' class="heart" id="like-btn"></button>
+                                <div id="likes_score">{{i.likes}}</div>
+                            </form>
+                        <div class="writer_content_elem_profile" >
+                            <div class="theme_name">
+                                <div>{{i.type_travel}}</div>
+                                <div>{{i.username}}</div>
+                            </div>
+                                <div style="margin: auto;">{{i.theme_post}}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% for i in info_all_post %}
+    <div class = 'elem_profile_post_open' id = '{{i.username}}_{{i.theme_post}}'>
+        <div style='width: 100%; height: 100%;'>
+            <div class = 'name_post_open'></div>
+            <div class = 'information_travel_post_open'></div>
+            <div class = 'content_post_open'></div>
+            <div class = 'username_post_open'></div>
+        </div>
+    </div>
+    {% endfor %}
+
+{{ data|json_script:"data" }}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).on('click', '.heart', function(e) {
+    e.preventDefault();
+    const form = ($(this).closest('form')).find('#likes_score');
+    const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    $.ajax({
+        type: 'POST',
+        data: $(this).attr('name'),
+        headers: {
+          'X-CSRFToken': csrfToken,
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        success: function() {
+            form.text(parseInt(form.text()) + 1);
+        },
+    });
+});
+$(document).ready(function() {
+  let open_post_check = null; // Переменная для хранения текущего открытого лайтбокса
+
+  $(document).on('click', function(event) {
+    const target = $('.elem_profile_post');
+    const clickedElement = event.target;
+
+    if (!target.is(clickedElement) && target.has(clickedElement).length === 0) {
+      $('.profile_content').css('filter', 'blur(0px)');
+      if (open_post_check && open_post_check.hasClass('elem_profile_post_open')) {
+        open_post_check.hide();
+        target.css('pointer-events', 'auto');
+      }
+    } else {
+      $('.profile_content').css('filter', 'blur(2.5px)');
+      const id = '#' + clickedElement.id + '.elem_profile_post_open';
+      const open_post = $(id);
+      open_post.show();
+      target.not(open_post).css('pointer-events', 'none');
+    }
+  });
+});
+</script>
+
+{% endblock wrapper %}
+

@@ -1,0 +1,31 @@
+{% extends 'main_app/login.html' %}
+
+{% block content_form %}
+<div class="post_body" style="">
+    <div class="login_container" >
+        <div style="text-align: center; color: #4caf50; font-size: 25px; font-family: 'Unbounded', cursive;">{% block nameInput %}Create post{% endblock nameInput %}</div>
+        <form id = 'form_post' method="post" style="height: 85%" enctype="multipart/form-data">
+        <div class="form_body" style="gap: 30px" action="" method="post">
+            {% for f in form %}
+                {% csrf_token %}
+                {% if f.label != 'type_travel' and f.label != 'country' and f.label != 'Image bg' %}
+                    {{f}}
+                {% endif %}
+                {% if f.label == 'country' %}
+                    <div style="display: flex; justify-content: space-between; flex-direction: row-reverse">
+                    {{f}}{% endif %}{% if f.label == 'type_travel' %}<div class="select_div">{{f}}</div></div>
+                {% endif %}
+                {% if f.label == 'Image bg' %}
+                    <div class = 'div_image_bg'>
+                        {{ f }}
+                        <div style="margin: 20px"><div style="display: flex; justify-content: center; z-index: 10; font-family: 'Unbounded', cursive; color: white; font-size: 50px ">+</div></div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </form>
+        <button class="button-88" type="submit" form="form_post">Button</button>
+    </div>
+  </div>
+{% endblock content_form %}

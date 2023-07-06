@@ -1,0 +1,183 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text&display=swap" rel="stylesheet">
+
+    <link href="{% static 'main_app/css/style.css' %}" type = 'text/css' rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{% static 'main_app/parallax.js' %}"></script>
+
+    <style>
+        .login_content{
+            background: url("{% static 'main_app/photo/tourist_bg_no-tree.png' %}") center / cover no-repeat;
+        }
+        .house-parallax{
+            background: url("{% static 'main_app/photo/head_main_house.png' %}") center / cover no-repeat;
+            z-index: 2; !important;
+        }
+        .up-parallax{
+            background: url("{% static 'main_app/photo/head_main_up_obl (1).png' %}") center / cover no-repeat;
+            top:0;
+            z-index: 0; !important;
+        }
+        .down-parallax{
+            background: url("{% static 'main_app/photo/head_main_down.png' %}") center / cover no-repeat;
+            bottom: 0;
+            z-index: 3;
+        }
+  /*      .around-parallax:hover{
+            !*filter: grayscale(0%);*!
+            !*transition: filter .5s ease-in-out;*!
+            !*filter: grayscale(99%);*!
+        }*/
+        .tickets_image{
+            background: url("{% static 'main_app/photo/tickets.jpg' %}") center / cover no-repeat;
+            background-size: 90%;
+        }
+        {#.image_content_1{
+            border: 10px solid transparent;
+            border-image: url(' static main_app/photo/border_1 ') 30 30 round;
+        }#}
+
+
+    </style>
+
+    <title>Aegane</title>
+<script language="JavaScript" type="text/javascript">
+</script>
+</head>
+
+<body>
+    {% block preload %}
+    <div class="preloader">
+      <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+      </div>
+    </div>
+    {% endblock preload %}
+    <div class="wrapper">
+        {% block wrapper %}
+        {% block parallax %}
+        <section class="parallax">
+            <div class="parallax_body">
+                <div class="parallax_container">
+                    <div class="parallax_label" style = "padding: 20px 20px">
+                        <div class="left_label"><a href="{% url 'main' %}">Aegane</a></div>
+                        <div class="right-side_label">
+                            <div class="main_shop_nav"><a>Shop</a></div>
+                            {% if not request.user.is_authenticated %}
+                                <div><a href="{% url 'login' %}">Login</a></div>
+                                <div><a href="{% url 'sign_in' %}">Sign in</a></div>
+                            {% else %}
+                                <div class="logo_main_nav"><a href="{% url 'add_post' %}">Add</a></div>
+                                <div class="logo_main_nav"><a href="{% url 'list_chat_box' %}">Chat</a></div>
+                                <div class="logout"><a href="{% url 'logout' %}">Logout</a></div>
+                                {% if profile_logo %}
+                                    <div class="logo_main_nav"><a href="{% url 'profile' slug_profile=profile_slug %}"><img width="30px" src="{{ profile_logo.url }}"></a></div>
+                                {% else %}
+                                    <div class="logo_main_nav"><a href="{% url 'profile' slug_profile=profile_slug %}"><img width="30px" src="{% static 'main_app/default_logo/default_logo.png' %}"></a></div>
+                                {% endif %}
+
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="parallax_flex" style="padding: 0">
+                        <div class="title_container">
+                            <h1 class="parallax_title" id="_ll">Large selection of countries</h1>
+                        </div>
+                        <div class="title_container _center_label">
+                            <h1 class="parallax_title" id="_cl">Travel not only by transport</h1>
+                        </div>
+                        <div class="title_container">
+                            <h1 class="parallax_title" id="_rl">Travel together</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="parallax_images images-parallax">
+                    <div class="images-parallax_item">
+                        <div class="house-parallax"></div>
+                    </div>
+                    <div class="images-parallax_item">
+                        <div class="down-parallax"></div>
+                    </div>
+                    <div class="images-parallax_item">
+                        <div class="up-parallax"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock parallax %}
+
+        {% block content %}
+        <section class="content">
+            <div class="main_content">
+
+                <div class="container_main_content">
+                    <div class = 'block_main_content'>
+                        <h1 class="text_main_content">We are supported by most international airlines, so you can easily book a ticket with our services </h1>
+                        <img src = "{% static 'main_app/photo/tourism_aerline/img_2.png' %}">
+                    </div>
+                </div>
+
+                <div class="container_main_content">
+                    <div class = 'block_main_content'>
+                        <h1 class="text_main_content">Many popular airlines have our offers and provide a guarantee for flights</h1>
+                        <div  id = 'airline_airplane' class="block_main_content">
+                            <img class="airplane" width="70%" src = "{% static 'main_app/photo/tourism_aerline/1670446039_24-kartinkin-net-p-vzletnaya-polosa-kartinki-instagram-27-transformed-removebg-preview(1).png' %}">
+                            <img class = 'airline' src = "{% static 'main_app/photo/tourism_aerline/12.png' %}">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="container_main_content">
+                    <div class = 'block_main_content' >
+                        <h1 class="text_main_content">Seek new acquaintances in better surroundings in different places and different parts of the world </h1>
+                        <div id="tourism_friends" class="block_main_content">
+                            <img class = 'bg_tourism' src = "{% static 'main_app/photo/tourism_friends/1684923225_fons-pibig-info-p-pole-gori-fon-instagram-23.jpg' %}">
+                            <img class = 'tourists' src = "{% static 'main_app/photo/tourism_friends/pngwing.com.png' %}" />
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="contact">
+                Contact Information:
+                <div class="contact_block">
+                    <div class="name_creator">
+                        <div>Autor: Kalinichenko Nikita</div>
+                        <div>Telegram: @nikitobus</div>
+                    </div>
+                    <div class="contact_info">
+                        <div>Telephone: +38(068)0284284</div>
+                        <div>Gmail: rccomfy1461@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock content %}
+        {% endblock wrapper %}
+    </div>
+
+    <script>
+            $(document).bind( 'mousewheel', function (e) {
+            var nt = $(document.body).scrollTop()-(e.deltaY*e.deltaFactor*100);
+            e.preventDefault();
+            e.stopPropagation();
+            $(document.body).stop().animate( {
+                 scrollTop : nt
+             } , 500 , 'easeInOutCubic' );
+        } )
+    </script>
+</body>
+</html>
