@@ -98,12 +98,10 @@
 </div>
     {% for i in info_all_post %}
     <div class = 'elem_profile_post_open' id = '{{i.username}}_{{i.theme_post}}'>
-        <div style='width: 100%; height: 100%;'>
             <div class = 'name_post_open'></div>
             <div class = 'information_travel_post_open'></div>
             <div class = 'content_post_open'></div>
             <div class = 'username_post_open'></div>
-        </div>
     </div>
     {% endfor %}
 
@@ -126,28 +124,29 @@ $(document).on('click', '.heart', function(e) {
         },
     });
 });
-$(document).ready(function() {
-  let open_post_check = null; // Переменная для хранения текущего открытого лайтбокса
 
   $(document).on('click', function(event) {
     const target = $('.elem_profile_post');
-    const clickedElement = event.target;
+    let clickedElement = event.target;
+        if (!target.is(clickedElement) && target.has(clickedElement).length === 0) {
+            if (clickedElement.classList == 'elem_profile_post_open'){
+                $('.profile_content').css('filter', 'blur(2.5px)');
+                $('.profile_content').css('pointer-events', 'none');
+            }
+            else{
+                $('.profile_content').css('filter', 'blur(0px)');
+                $('.profile_content').css('pointer-events', 'auto');
+            }
+        } else {
+            console.log(0)
 
-    if (!target.is(clickedElement) && target.has(clickedElement).length === 0) {
-      $('.profile_content').css('filter', 'blur(0px)');
-      if (open_post_check && open_post_check.hasClass('elem_profile_post_open')) {
-        open_post_check.hide();
-        target.css('pointer-events', 'auto');
-      }
-    } else {
-      $('.profile_content').css('filter', 'blur(2.5px)');
-      const id = '#' + clickedElement.id + '.elem_profile_post_open';
-      const open_post = $(id);
-      open_post.show();
-      target.not(open_post).css('pointer-events', 'none');
-    }
-  });
-});
+            let id = '#' + clickedElement.id + '.elem_profile_post_open';
+            const open_post = $(id);
+            $('.profile_content').css('filter', 'blur(2.5px)');
+            $('.profile_content').css('pointer-events', 'none');
+
+        }
+    });
 </script>
 
 {% endblock wrapper %}

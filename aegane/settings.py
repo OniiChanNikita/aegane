@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pcw1%*(w64-*o@y@b-s1d3xfq%c_(988qbr9(aky&b%pq1e5!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['master.aegane.development.c66.me', '0.0.0.0', 'master.aegane.c66.me', '127.0.0.1']
+ALLOWED_HOSTS = ['master.aegane.development.c66.me', '0.0.0.0', 'master.aegane.c66.me', '127.0.0.1', '172.24.197.23']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_app',
     'channels',
-    "daphne",
+    # "daphne",
 ]
 
 MIDDLEWARE = [

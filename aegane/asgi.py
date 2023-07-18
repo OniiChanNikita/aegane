@@ -1,12 +1,15 @@
 import os, django
+from django.core.asgi import get_asgi_application
+
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'aegane.settings')  # Replace 'myproject' with your project name
 django.setup()
 
-from django.core.asgi import get_asgi_application
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.urls import re_path
 from main_app import consumers
+
 
 
 # URLs that handle the WebSocket connection are placed here.
