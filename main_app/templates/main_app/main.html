@@ -42,10 +42,10 @@
             background: url("{% static 'main_app/photo/tickets.jpg' %}") center / cover no-repeat;
             background-size: 90%;
         }
-        {#.image_content_1{
+        .image_content_1{
             border: 10px solid transparent;
             border-image: url(' static main_app/photo/border_1 ') 30 30 round;
-        }#}
+        }
 
 
     </style>
@@ -73,7 +73,7 @@
                     <div class="parallax_label" style = "padding: 20px 20px">
                         <div class="left_label"><a href="{% url 'main' %}">Aegane</a></div>
                         <div class="right-side_label">
-                            <div class="main_shop_nav"><a>Shop</a></div>
+                            <!-- <div class="main_shop_nav"><a>Shop</a></div> -->
                             {% if not request.user.is_authenticated %}
                                 <div><a href="{% url 'login' %}">Login</a></div>
                                 <div><a href="{% url 'sign_in' %}">Sign in</a></div>

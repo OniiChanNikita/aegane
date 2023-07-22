@@ -13,21 +13,25 @@
                 <div class="list_chats">
                     {% for i in list_chat %}
                     <a class="submit_button_list_user" href="{% url 'chat_box' i.slug_num %}">
+                        <div>
                         {% if i.user1 != request.user.username %}
                             {{ i.user1 }}
                         {% else %}
                             {{ i.user2 }}
                         {% endif %}
+                            <div class='last_message_and_username'>
+                                {{i.last_message | truncatechars:30}}
+                            </div>
+                        </div>
+                        <div class='last_message_and_username'>
+                            {{i.last_username | truncatechars:7}}
+                        </div>
                         {% block wchat_block %}
                         {% endblock wchat_block %}
                     </a>
+                    <div class="line"></div>
                     {% endfor %}
                 </div>
-            </div>
-            <div class="chat_box">
-                {% block chat_block %}
-
-                {% endblock chat_block %}
             </div>
         </div>
     </div>

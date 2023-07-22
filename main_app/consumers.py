@@ -8,6 +8,8 @@ from django.db import transaction
 from .models import MessageChat
 from asgiref.sync import sync_to_async
 
+from datetime import datetime
+
 
 class ChatRoomConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -65,24 +67,29 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                     {
                         "message": message,
                         "username": username,
-                        "date_public": str(self.message_chat.date_public.strftime("%a %b %d %Y")),
+                        "date_public": str((datetime.now()).strftime('%a %b %d %Y')),
                     }
                 ))]
+                self.message_chat.last_username = username
+                self.message_chat.last_message = message
             else:
                 self.message_chat.message.append(json.loads(json.dumps(
                     {
                         "message": message,
                         "username": username,
-                        "date_public": str(self.message_chat.date_public.strftime("%a %b %d %Y")),
+                        "date_public": str((datetime.now()).strftime('%a %b %d %Y')),
                     }
                 )))
+                self.message_chat.last_username = username
+                self.message_chat.last_message = message
                 await database_sync_to_async(self.message_chat.save)()
             await self.send(
                 text_data=json.dumps(
                     {
                         "message": message,
                         "username": username,
-                        "date_public": str(self.message_chat.date_public.strftime("%a %b %d %Y")),
+                        "date_public": str((datetime.now()).strftime('%a %b %d %Y')),
+                        # self.message_chat.date_public.strftime("%a %b %d %Y")
                     }
                 )
             )

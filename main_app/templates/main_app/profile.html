@@ -9,6 +9,7 @@
         overflow: hidden;
         display: flex;
         /*background-color: #E7E9E7;*/
+        overflow-y: scroll;
         
     }
     #sea_background{
@@ -34,9 +35,9 @@
                 <img src="{% static 'main_app/default_logo/default_logo.png' %}" class="logo_profile_img">
                 {% endif %}
                 {% if info_user.username != request.user.username %}
-                <form method="post" style="width: min-content">
+                <form method="post" style="width: 100%; display: flex; justify-content: center;">
                     {% csrf_token %}
-                    <button name="button_add_friend" type="submit">Добавить друга</button>
+                    <button class='button_add_friend' name="button_add_friend" type="submit">Добавить друга</button>
                 </form>
 
             {% endif %}
@@ -97,7 +98,7 @@
     </div>
 </div>
     {% for i in info_all_post %}
-    <div class = 'elem_profile_post_open' id = '{{i.username}}_{{i.theme_post}}'>
+    <div style = 'display: none;' class = 'elem_profile_post_open' id = '{{i.username}}_{{i.theme_post}}'>
             <div class = 'name_post_open'></div>
             <div class = 'information_travel_post_open'></div>
             <div class = 'content_post_open'></div>
@@ -132,10 +133,13 @@ $(document).on('click', '.heart', function(e) {
             if (clickedElement.classList == 'elem_profile_post_open'){
                 $('.profile_content').css('filter', 'blur(2.5px)');
                 $('.profile_content').css('pointer-events', 'none');
+                clickedElement.css('display', 'block')
             }
             else{
                 $('.profile_content').css('filter', 'blur(0px)');
                 $('.profile_content').css('pointer-events', 'auto');
+                $('.elem_profile_post_open').css('display', 'none')
+
             }
         } else {
             console.log(0)
@@ -144,7 +148,7 @@ $(document).on('click', '.heart', function(e) {
             const open_post = $(id);
             $('.profile_content').css('filter', 'blur(2.5px)');
             $('.profile_content').css('pointer-events', 'none');
-
+            open_post.css('display', 'block')
         }
     });
 </script>

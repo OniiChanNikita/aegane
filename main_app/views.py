@@ -89,24 +89,20 @@ def log_out(request):
 def profile(request, slug_profile):
     # friends and post profiles
     get_profile = get_object_or_404(ProfileUser, slug_profile=slug_profile)
-    friend_obj, created = FriendsUsers.objects.get_or_create(username=request.user)
-    count_friend = friend_obj.friends.all()
+    friend_obj_u, created = FriendsUsers.objects.get_or_create(username=request.user)
+    count_friend = friend_obj_u.friends.all()
 
     all_posts = list(PostUserModel.objects.all())
     info_user_post = PostUserModel.objects.filter(username=get_profile.username)
     active_profile = ProfileUser.objects.get(username=request.user.username)
 
-    friend = User.objects.get(username=request.user.username)
     if request.method == 'POST':
         if 'button_add_friend' in request.POST:
-            print(request.POST)
             if request.user.username != get_profile.username:
-
-                print('add')
-                friend_obj.friends.add(friend)
+                friend = User.objects.get(username=get_profile.username)
+                friend_obj_u.friends.add(friend)
         elif request.is_ajax():
             for post in info_user_post:
-                print(request.POST)
                 if post.username+'_'+post.theme_post in request.POST:
                     post.likes += 1
                     post.save()
@@ -186,21 +182,9 @@ def chat_box(request, slug_num):
             message_list.append(i)
         print('message_list--->', message_list)
         # --------------
-        num = 0
 
-        if request.method == 'POST':
-            form = SearchUser(request.POST)
-            if form.is_valid():
-
-                if request.user.username != request.POST['username']:
-                    MessageChat.objects.create(user1=request.user.username, user2=request.POST['username'],
-                                               slug_num=random_nums())
-        else:
-            form = SearchUser()
         return render(request, "main_app/chat_box.html",
-                      {'form_search': form, 'list_chat': MessageChat.objects.filter(
-                          Q(user1=request.user.username) | Q(user2=request.user.username)),
-                       'chat_box_ident': get_obj_slug, 'profile_get_obj_slug':profile_get_obj_slug,
+                      {'chat_box_ident': get_obj_slug, 'profile_get_obj_slug':profile_get_obj_slug,
                        'message_dict': message_dict,
                        'message_dict_json': message_chat.message, 'ur_user_logo': ur_user_logo,
                        'receive_user_logo': receive_user_logo})
@@ -213,13 +197,21 @@ def list_chat_box(request):
         if request.method == 'POST':
             form = SearchUser(request.POST)
             if form.is_valid():
+                list_chat = MessageChat.objects.filter(Q(user1=request.user.username) | Q(user2=request.user.username))
+                if ProfileUser.objects.filter(username = request.POST['username']).first() != None:
+                    if request.user.username != request.POST['username']:
+                        if MessageChat.objects.filter(Q(user1=request.user.username, user2=request.POST['username']) | Q(user1=request.POST['username'], user2=request.user.username)).first() != None:
+                            list_chat = MessageChat.objects.filter(Q(user1=request.user.username, user2=request.POST['username']) | Q(user1=request.POST['username'], user2=request.user.username))
+                        else:
+                            print('create_message')
+                            MessageChat.objects.create(user1=request.user.username, user2=request.POST['username'], slug_num=random_nums())
+                            list_chat = MessageChat.objects.filter(Q(user1=request.user.username) | Q(user2=request.user.username))
 
-                if request.user.username != request.POST['username']:
-                    MessageChat.objects.create(user1=request.user.username, user2=request.POST['username'],
-                                               slug_num=random_nums())
+                
+                return render(request, "main_app/list_chat_box.html", {'form_search': form,
+                                                               'list_chat': list_chat})
         else:
             form = SearchUser()
+            list_chat = MessageChat.objects.filter(Q(user1=request.user.username) | Q(user2=request.user.username))
         return render(request, "main_app/list_chat_box.html", {'form_search': form,
-                                                               'list_chat': MessageChat.objects.filter(
-                                                                   Q(user1=request.user.username) | Q(
-                                                                       user2=request.user.username))})
+                                                               'list_chat': list_chat})

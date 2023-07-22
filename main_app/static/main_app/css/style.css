@@ -9,21 +9,28 @@ colors:
 #8b7aa8 -- pump-white
 #27263d -- blue-black
 */
-html::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 8px; /* Ширина полосы прокрутки */
 }
 
-html::-webkit-scrollbar-track {
+::scrollbar-track {
   background-color: transparent; /* Прозрачный фон трека */
 }
 
-html::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.5); /* Цвет ползунка с прозрачностью */
   border-radius: 4px; /* Скругление углов ползунка */
 }
 
-html::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0, 0, 0, 0.7); /* Цвет ползунка при наведении с прозрачностью */
+}
+.line {
+    background-color: transparent;
+    background-image: linear-gradient(to right, transparent 5%, lightgray 50%, transparent 95%);
+    display: block;
+    width: 100%;
+    height: 1px;
 }
 .preloader {
   /*фиксированное позиционирование*/
@@ -115,14 +122,17 @@ a{
 }*/
 body{
     overflow-x: hidden;
+    position: absolute;
     background-color: rgb(245, 245, 245);
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    width: 100%;
+    height: 100%;
 }
 .wrapper{
     height: 100vh;
-    width:100%;
+    width:100vw;
 }
 ._center_label{
     border-left: 2px white solid;
@@ -386,9 +396,15 @@ body{
 .button-88:active {
     box-shadow: 0 0.3em 1em -0.5em #14a73e98;
 }
+.button_add_friend{
+    border: 2px #bee365 dashed;
+    background-color: #deecc5;
+    color: white;
+}
 
 .profile_body{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     flex-direction: row-reverse;
     width: 100%;
@@ -396,7 +412,10 @@ body{
     margin: auto;
     padding: 20px;
     border-radius: 5px;
+    gap: 10px;
+
 }
+
 .profile_key-words{
     display: flex;
     justify-content: space-between;
@@ -445,9 +464,10 @@ body{
 }
 
 .profile_tourist-post{
+    position: relative;
     display: flex;
     min-height: 100%;
-    justify-content: start;
+    justify-content: space-around;
     background-color: white;
     flex-direction: column;
     width: 50%;
@@ -455,7 +475,16 @@ body{
     height: 100%;
     padding: 10px;
     box-shadow: 1.5px 1.5px 5px 1px gray;
-    overflow-y: scroll;
+    overflow: hidden;
+
+}
+@media screen and (max-width: 1075px) {
+    .profile_key-words{
+        width:90%;
+    }
+    .profile_tourist-post{
+        width: 90%;
+    }
 }
 .nav_profile-post{
     display: flex;
@@ -484,6 +513,7 @@ body{
     justify-content: center;
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
 }
 .content_profile_post{
     display: flex;
@@ -564,7 +594,6 @@ body{
 
 
 .elem_profile_post_open{
-    display: none !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -573,8 +602,8 @@ body{
     margin: auto;
     width: 40%;
     height: 40%;
-    background-color: #43F7AC;
     z-index: 999;
+    border: 2px solid #bee365;
 }
 
 
@@ -682,7 +711,7 @@ body{
     gap: 10px;
 }
 .list_box{
-    width: 20%;
+    width: 100%;
     min-height: 100%;
     background: white;
     display: flex;
@@ -692,7 +721,7 @@ body{
     border: 2px #bee365 solid;
 }
 .chat_box{
-    width:80%;
+    width:100%;
     min-height: 100%;
     background: white;
     display: flex;
@@ -709,7 +738,7 @@ body{
     text-align-all: center;
 }
 .form_chat_list{
-    padding: 10% 5% 0 5%;
+    padding: 50px 5% 0 5%;
 }
 .form_chat_list input:focus{
     border-bottom: 1.5px solid #4caf50;
@@ -734,11 +763,18 @@ body{
 }
 .list_chats a{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     font-family: 'Unbounded', sans-serif;
     color: black;
     background: transparent;
     border: 0px;
+}
+.last_message_and_username{
+    color: gray;
+    font-size: 12px;
+    font-style: 'Roboto';
+    width: 250px;
+    height: 15px;
 }
 .chat_box form{
     display: flex;

@@ -4,27 +4,6 @@
 {% block content_form %}
     <div class="box_center">
         <div class="box">
-            <div class="list_box">
-                <form method="post" class="form_chat_list">
-                    {% csrf_token %}
-                    {% for f in form_search %}
-                        {{ f }}
-                    {% endfor %}
-                </form>
-                <div class="list_chats">
-                    {% for i in list_chat %}
-                    <a class="submit_button_list_user" href="{% url 'chat_box' i.slug_num %}">
-                        {% if i.user1 != request.user.username %}
-                            {{ i.user1 }}
-                        {% else %}
-                            {{ i.user2 }}
-                        {% endif %}
-                        {% block wchat_block %}
-                        {% endblock wchat_block %}
-                    </a>
-                    {% endfor %}
-                </div>
-            </div>
             <div class="chat_box">
 {% block chat_block %}
                     <form method="post">
